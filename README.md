@@ -84,6 +84,8 @@ Random Forest   | Ensemble of decision trees              | 98.7%
 SVM (optional)  | Kernel-based classification             | 95.4%
 Logistic Reg.   | Baseline linear model                   | 91.8%
 
+[CI Pipeline](https://github.com/TJaineera/Threat-Detection-Cybersec/actions/workflows/ci.yml/badge.svg)
+
 Future Enhancements
 - Integrate deep learning (LSTM/CNN for log sequences)
 - Add anomaly detection with unsupervised learning
