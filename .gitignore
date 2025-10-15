@@ -1,31 +1,10 @@
-# Python
-__pycache__/
+﻿__pycache__/
 *.pyc
-*.pyo
-*.pyd
-*.log
-*.csv
-*.json
-*.joblib
-*.ipynb_checkpoints/
-
-#  Virtual environment
-venv/
-.env/
 .venv/
-ENV/
-env.bak/
-
-#  Data & models
 data/raw/
 data/processed/
 models/*.pkl
 models/*.joblib
-models/*.h5
-models/*.onnx
-
-# IDE / OS
+.ipynb_checkpoints/
 .DS_Store
 Thumbs.db
-.vscode/
-.idea/
