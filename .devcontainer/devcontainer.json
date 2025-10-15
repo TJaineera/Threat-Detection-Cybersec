@@ -1,0 +1,10 @@
+{
+  "name": "Threat-Detection-Cybersec",
+  "build": { "dockerfile": "Dockerfile" },
+  "postCreateCommand": "pip install -U pip && pip install -r requirements.txt",
+  "forwardPorts": [5000],
+  "portsAttributes": {
+    "5000": { "label": "Flask API", "onAutoForward": "openBrowser" }
+  },
+  "features": {}
+}
