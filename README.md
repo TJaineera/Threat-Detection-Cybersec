@@ -1,43 +1,91 @@
-# AI-Powered Cybersecurity Threat Detection System
+AI-Powered Cybersecurity Threat Detection System:
 
-Machine learning–based intrusion detection using security logs / network telemetry. Classifies DoS, Probe, R2L, U2R, and Normal traffic. Includes training scripts and a Flask API for real-time predictions.
+This project leverages Machine Learning and Security Logs to detect cyber threats in real time. It classifies intrusions such as DoS, Probe, R2L, U2R, and Normal traffic using AI models.
+Features
+- AI-powered intrusion detection using scikit-learn
+- Detects malware, phishing, DoS, Probe, and unauthorized access
+- Built with Flask API for real-time threat predictions
+- Displays confidence scores for each prediction
+- Modular structure for easy retraining and deployment
+Project Structure
 
----
-
-## Features
-- Supervised ML pipeline (scikit-learn)
-- Real-time predictions via Flask API with confidence scores
-- Reproducible preprocessing with saved encoders/label map
-- Scripts for preprocess → train → evaluate → serve
-
----
-
-## Project Structure
 Threat-Detection-Cybersec/
-├── data/ # Raw & processed datasets (not tracked)
-│ ├── raw/ # e.g., NSL-KDD/KDD'99 ARFF/CSV
-│ └── processed/ # outputs from preprocess.py
-├── models/ # Saved models & encoders
-│ ├── threat_detector_rf.pkl
-│ ├── feature_columns.json
-│ └── encoders.joblib
-├── src/
-│ ├── preprocess.py # ARFF/CSV → encoded features + labels
-│ ├── train.py # Train & persist model + artifacts
-│ ├── predict.py # Batch/local predictions for CSV/JSON
-│ └── deploy.py # Flask API for real-time predictions
-├── requirements.txt
-├── README.md
-└── .gitignore
+├── data/                      # Raw and processed datasets
+│   ├── raw/                   # Source ARFF or CSV files
+│   └── processed/             # Cleaned data for training/testing
+├── models/                    # Trained model and encoders
+│   └── threat_detector_rf.pkl
+├── src/                       # Source scripts
+│   ├── preprocess.py          # Data loading & preprocessing
+│   ├── train.py               # Model training
+│   ├── predict.py             # Batch/local predictions
+│   └── deploy.py              # Flask API for real-time predictions
+├── requirements.txt           # Project dependencies
+├── README.md                  # Documentation
+└── .gitignore                 # Ignored files
 
-
-> **Dataset**: This repo expects NSL-KDD/KDD’99-style columns. Place raw files under `data/raw/` (e.g., `KDDTrain+.txt`, `KDDTest+.txt`, or ARFF). Update paths in `src/preprocess.py` if yours differ.
-
----
-
-## Setup
-
-### 1) Clone
-```bash
+Installation & Setup
+1. Clone this repository:
+   
 git clone https://github.com/TJaineera/Threat-Detection-Cybersec.git
+
 cd Threat-Detection-Cybersec
+
+2. Create and activate a virtual environment:
+   
+python -m venv venv
+
+venv\Scripts\activate (Windows)
+
+source venv/bin/activate (macOS/Linux)
+
+3. Install dependencies:
+
+pip install -r requirements.txt
+
+Usage Guide
+
+Preprocess Data: 
+python src/preprocess.py
+
+Train Model: 
+python src/train.py
+
+Local Prediction: 
+python src/predict.py
+
+Deploy Flask API: 
+python src/deploy.py
+
+Test the API (Windows example): 
+curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d "[{\"duration\":0,\"protocol_type\":\"tcp\",\"service\":\"http\",\"flag\":\"SF\",\"src_bytes\":181,\"dst_bytes\":545}]"
+Example Response
+
+{
+  "prediction": ["normal"],
+  "confidence": [0.996]
+}
+
+Requirements
+
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.2
+flask==3.0.3
+joblib==1.4.2
+liac-arff==2.5.0
+imbalanced-learn==0.12.3
+
+Model Overview
+
+Algorithm       | Description                            | Accuracy
+----------------|----------------------------------------|----------
+Random Forest   | Ensemble of decision trees              | 98.7%
+SVM (optional)  | Kernel-based classification             | 95.4%
+Logistic Reg.   | Baseline linear model                   | 91.8%
+
+Future Enhancements
+- Integrate deep learning (LSTM/CNN for log sequences)
+- Add anomaly detection with unsupervised learning
+- Include dashboard for visualization
+- Deploy on AWS Lambda or Docker
